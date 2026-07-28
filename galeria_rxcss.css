@@ -161,7 +161,7 @@
 /* Efecto visual al pasar el mouse (Solo PC) */
 @media (hover: hover) {
   .barra-herramientas-tc button:hover {
-    background-color: rgba(50, 50, 50, 0.9) !important;
+    background-color: rgba(224,160,4, 0.7) !important;
     border-color: rgba(255, 255, 255, 0.3) !important;
     transform: scale(1.05);
   }
