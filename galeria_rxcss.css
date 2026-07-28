@@ -1,0 +1,83 @@
+/* Contenedor general en fondo oscuro para unificar la interfaz */
+.galeria-contenedor-medica { 
+  max-width: 600px; 
+  margin: 20px auto; 
+  font-family: Arial, sans-serif; 
+  background: #111111; /* Fondo oscuro exterior */
+  padding: 10px;
+  border-radius: 8px;
+}
+.visor-estructura { position: relative; width: 100%; }
+
+/* CAJA NEGRA DEL VISOR */
+.visor-negro { 
+  position: relative; 
+  background: #000000; 
+  width: 100%; 
+  height: 400px; 
+  overflow: hidden; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border-radius: 6px 6px 0 0; /* Solo redondeamos las esquinas superiores */
+}
+/* Invierte estrictamente los colores de la imagen interna sin alterar los fondos negros */
+.visor-negro.invertido img { 
+  filter: invert(1); 
+}
+/* Ítems e imágenes */
+.galeria-item-tc { display: none; width: 100%; height: 100%; align-items: center; justify-content: center; }
+.galeria-item-tc.activo { display: flex; }
+.galeria-item-tc img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: move; user-select: none; transition: transform 0.1s ease-out; }
+
+/* LEYENDA ANATÓMICA INTEGRADA CON ALTURA FIJA E INVARIABLE */
+.texto-corrido-anatomico { 
+  display: block; 
+  width: 100%; 
+  height: 85px; /* Altura fija estricta para garantizar que nunca cambie el tamaño general */
+  overflow-y: auto; /* Muestra una barra de desplazamiento interno si el texto llega a exceder el espacio */
+  box-sizing: border-box; 
+  margin-top: 0; 
+  padding: 12px 15px; 
+  font-size: 13.5px; 
+  line-height: 1.6; 
+  color: #dddddd; 
+  text-align: justify; 
+  background: #000000; 
+  border-top: 1px solid #7D0000; 
+  border-radius: 0 0 6px 6px; 
+}
+
+/* Personalización elegante de la barra de scroll para que combine con el diseño PACS oscuro */
+.texto-corrido-anatomico::-webkit-scrollbar {
+  width: 6px;
+}
+.texto-corrido-anatomico::-webkit-scrollbar-track {
+  background: #000000;
+}
+.texto-corrido-anatomico::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+}
+.texto-corrido-anatomico::-webkit-scrollbar-thumb:hover {
+  background: #e8a813; /* Resalta en dorado al pasar el cursor */
+}
+
+.texto-corrido-anatomico strong { 
+  color: #B30000; 
+  font-weight: bold; 
+}
+/* Controles de Interfaz */
+.contador-tc { position: absolute; top: 10px; left: 10px; background: rgba(224,160,4); color: #fff; padding: 4px 8px; font-size: 12px; border-radius: 3px; z-index: 10; }
+.barra-herramientas-tc { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; z-index: 10; }
+.barra-herramientas-tc button { background: rgba(0,0,0,.7); border: 1px solid #444; width: 30px; height: 30px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.barra-herramientas-tc button svg { width: 16px; height: 16px; fill: #fff; }
+.barra-herramientas-tc button:hover { background: #e8a813; }
+.barra-herramientas-tc button:hover svg { fill: #000; }
+
+/* Navegadores laterales */
+.btn-lateral { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(51,92,145,.5); border: none; width: 40px; height: 60px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; }
+.btn-lateral:hover { background: rgba(80,137,204,.8); }
+.btn-lateral svg { width: 24px; height: 24px; fill: #fff; }
+.btn-lateral.izquierdo { left: 0; border-radius: 0 4px 4px 0; }
+.btn-lateral.derecho { right: 0; border-radius: 4px 0 0 4px; }
