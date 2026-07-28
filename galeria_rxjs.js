@@ -46,7 +46,13 @@ const render = (nIdx) => {
 };
 
 // Eventos de Arrastre multiplataforma (Ratón y Touch)
-const getCoord = e => e.touches ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : { x: e.clientX, y: e.clientY };
+// CORRECCIÓN RADICAL: Extrae correctamente las coordenadas en PC y en Móvil
+const getCoord = e => {
+  if (e.touches && e.touches.length > 0) {
+    return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }
+  return { x: e.clientX, y: e.clientY };
+};
 
 const iniciarArrastre = e => {
   if (zoom > 1) {
