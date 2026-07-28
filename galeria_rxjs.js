@@ -1,18 +1,15 @@
 // 1. LEER CONFIGURACIÓN DINÁMICA DIRECTAMENTE DEL POST
 const v = document.getElementById('visor-tc');
 
-// Extrae el total y la ruta desde los atributos 'data-' del HTML
 const TOTAL_CORTES = parseInt(v.getAttribute('data-total')) || 0;
 const RUTA_BASE = v.getAttribute('data-ruta') || "";
-
-// Absorbe el objeto de textos específicos del post actual
 const TEXTOS_ANATOMICOS = window.TEXTOS_ANATOMICOS_POST || {};
 
 const $ = id => document.getElementById(id);
 const c = $('contador-cortes'), ley = $('descripcion-anatomica');
 let idx = 0, zoom = 1, dx = 0, dy = 0, drag = false, sx, sy;
 
-// Inicialización e inyección secuencial de cortes dentro del visor
+// Inicialización e inyección de imágenes
 for (let i = 1; i <= TOTAL_CORTES; i++) {
   const item = document.createElement('div');
   item.className = 'galeria-item-tc' + (i === 1 ? ' activo' : '');
@@ -26,7 +23,6 @@ for (let i = 1; i <= TOTAL_CORTES; i++) {
   v.appendChild(item);
 }
 
-// Captura de elementos posterior a su inyección en el DOM
 const cortes = document.querySelectorAll('.galeria-item-tc');
 
 const tform = () => {
@@ -45,9 +41,11 @@ const render = (nIdx) => {
   tform();
 };
 
-// Eventos de Arrastre multiplataforma (Ratón y Touch)
-// CORRECCIÓN RADICAL: Extrae correctamente las coordenadas en PC y en Móvil
+// ==========================================
+// CORRECCIÓN CRÍTICA DE COORDENADAS TÁCTILES
+// ==========================================
 const getCoord = e => {
+  // Acceso correcto al primer dedo [0] que toca la pantalla
   if (e.touches && e.touches.length > 0) {
     return { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }
@@ -82,28 +80,34 @@ window.onmouseup = finalizarArrastre;
 window.ontouchend = finalizarArrastre;
 window.ontouchcancel = finalizarArrastre;
 
-// Asignación de eventos de control a la botonera
-$('btn-tc-anterior').onclick = () => render(idx - 1);
-$('btn-tc-siguiente').onclick = () => render(idx + 1);
-$('btn-tc-invertir').onclick = () => v.classList.toggle('invertido');
-$('btn-tc-zoom-mas').onclick = () => { if (zoom < 4) { zoom += 0.25; tform(); } };
-$('btn-tc-zoom-menos').onclick = () => { if (zoom > 1) { zoom -= 0.25; if (zoom == 1) dx = dy = 0; tform(); } };
-$('btn-tc-reset').onclick = () => { zoom = 1; dx = dy = 0; v.classList.remove('invertido'); tform(); };
-// EVITAR QUE EL EVENTO TÁCTIL DEL VISOR BLOQUEE NINGÚN BOTÓN
-const botonesAProteger = [
-  'btn-tc-anterior', 'btn-tc-siguiente', 
-  'btn-tc-zoom-mas', 'btn-tc-zoom-menos', 
-  'btn-tc-invertir', 'btn-tc-reset'
-];
+// ==========================================
+// SISTEMA HÍBRIDO DE BOTONES (PC Y MÓVIL)
+// ==========================================
+const asignarAccion = (id, accion) => {
+  const el = $(id);
+  if (!el) return;
 
-botonesAProteger.forEach(id => {
-  const boton = $(id);
-  if (boton) {
-    boton.ontouchstart = (e) => {
-      e.stopPropagation(); // Detiene el arrastre del visor
-    };
-  }
-});
+  // Acción para PC
+  el.onclick = (e) => {
+    e.preventDefault();
+    accion();
+  };
+
+  // Acción inmediata para Móviles (Touch)
+  el.ontouchstart = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Evita que el toque se propague al visor negro
+    accion();
+  };
+};
+
+// Vinculación segura de todas las funciones
+asignarAccion('btn-tc-anterior', () => render(idx - 1));
+asignarAccion('btn-tc-siguiente', () => render(idx + 1));
+asignarAccion('btn-tc-invertir', () => v.classList.toggle('invertido'));
+asignarAccion('btn-tc-zoom-mas', () => { if (zoom < 4) { zoom += 0.25; tform(); } });
+asignarAccion('btn-tc-zoom-menos', () => { if (zoom > 1) { zoom -= 0.25; if (zoom == 1) dx = dy = 0; tform(); } });
+asignarAccion('btn-tc-reset', () => { zoom = 1; dx = dy = 0; v.classList.remove('invertido'); tform(); });
 
 // Carga del estado inicial
 render(0);
