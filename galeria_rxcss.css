@@ -25,16 +25,14 @@
 .visor-negro.invertido img { 
   filter: invert(1); 
 }
-/* 2. Ocultar de forma absoluta y radical los cortes inactivos */
+/* 1. Neutralizar cualquier fondo heredado en los contenedores de los cortes */
 .galeria-item-tc {
-  display: none !important; /* Desaparece por completo del flujo */
-  width: 100% !important;
-  height: 100% !important;
-  justify-content: center !important;
-  align-items: center !important;
-  position: absolute !important; /* No empuja a los demás elementos */
-  top: 0 !important;
-  left: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
 }
 
 /* 3. Mostrar únicamente el corte que tiene la clase activo */
@@ -42,15 +40,27 @@
   display: flex !important;
 }
 
-/* 4. Restablecer la imagen a su comportamiento nativo original */
+/* 2. Forzar a la etiqueta IMG a ignorar el background heredado de "body img" de Blogger */
 .galeria-item-tc img {
+  /* Anulamos radicalmente fondos, degradados o imágenes de fondo de la plantilla */
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  
+  /* Eliminamos bordes, sombreados y rellenos fantasmas */
   border: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
   box-shadow: none !important;
+
+  /* Restablecemos el comportamiento y escalado perfecto de la tomografía */
   max-width: 100% !important;
   max-height: 100% !important;
   width: auto !important;
   height: auto !important;
   display: block !important;
+  object-fit: contain !important;
 }
 
 /* LEYENDA ANATÓMICA INTEGRADA CON ALTURA FIJA E INVARIABLE */
@@ -103,12 +113,14 @@
 .btn-lateral:hover { background: rgba(80,137,204,.8); }
 .btn-lateral svg { width: 24px; height: 24px; fill: #fff; }
 .btn-lateral.izquierdo { left: 0; border-radius: 0 4px 4px 0; }
-/* 1. Asegurar que el visor actúe como un escenario cerrado y centrado */
+
+/* 3. Asegurar que el contenedor negro actúe como único fondo válido */
 #visor-tc {
+  background-color: #000000 !important; /* Fuerza el fondo negro puro del visor */
+  background-image: none !important;
   position: relative !important;
-  overflow: hidden !important; /* Corta cualquier desborde fantasma */
+  overflow: hidden !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
 }
-.btn-lateral.derecho { right: 0; border-radius: 4px 0 0 4px; }
