@@ -197,4 +197,6 @@
   display: block !important;    /* Cambiamos de flex a block para evitar filas flotantes */
   width: 100% !important;
   height: 450px !important;     /* Ajusta este alto al tamaño real de tu visor */
+  touch-action: none !important; 
+}
 }
