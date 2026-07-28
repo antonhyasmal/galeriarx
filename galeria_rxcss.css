@@ -140,20 +140,46 @@
   touch-action: manipulation !important;
   cursor: pointer !important;
   
-  /* Tamaño compacto ideal para no tapar la anatomía médica */
-  width: 32px !important;
-  height: 32px !important;
+  /* Tamaño y forma compacta */
+  width: 36px !important;
+  height: 36px !important;
   padding: 0 !important;
   margin: 0 !important;
-  
-  /* Estilizado básico (puedes adaptarlo al diseño original de tus botones) */
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  border-radius: 4px !important; /* Bordes ligeramente redondeados */
+  border-radius: 8px !important; /* Bordes suaves */
+
+  /* Estilo Minimalista (Oscuro semi-transparente) */
+  background-color: rgba(30, 30, 30, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(4px) !important; /* Efecto desenfoque moderno */
+  transition: all 0.2s ease !important;
 }
-.barra-herramientas-tc button svg { width: 16px; height: 16px; fill: #fff; }
-.barra-herramientas-tc button:hover { background: #e8a813; }
+
+/* Efecto visual al pasar el mouse (Solo PC) */
+@media (hover: hover) {
+  .barra-herramientas-tc button:hover {
+    background-color: rgba(50, 50, 50, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    transform: scale(1.05);
+  }
+}
+.barra-herramientas-tc button.control-activo {
+  background-color: #0076ff !important; /* Azul eléctrico médico (puedes cambiarlo a tu gusto) */
+  border-color: #00c6ff !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(0, 118, 255, 0.5) !important;
+}
+
+/* Estilo para los iconos SVG dentro de los botones */
+.barra-herramientas-tc button svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: currentColor !important; /* Hace que el icono cambie de color junto con el texto */
+  display: block !important;
+}
 .barra-herramientas-tc button:hover svg { fill: #000; }
 
 /* Navegadores laterales */
