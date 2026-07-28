@@ -89,6 +89,21 @@ $('btn-tc-invertir').onclick = () => v.classList.toggle('invertido');
 $('btn-tc-zoom-mas').onclick = () => { if (zoom < 4) { zoom += 0.25; tform(); } };
 $('btn-tc-zoom-menos').onclick = () => { if (zoom > 1) { zoom -= 0.25; if (zoom == 1) dx = dy = 0; tform(); } };
 $('btn-tc-reset').onclick = () => { zoom = 1; dx = dy = 0; v.classList.remove('invertido'); tform(); };
+// EVITAR QUE EL EVENTO TÁCTIL DEL VISOR BLOQUEE NINGÚN BOTÓN
+const botonesAProteger = [
+  'btn-tc-anterior', 'btn-tc-siguiente', 
+  'btn-tc-zoom-mas', 'btn-tc-zoom-menos', 
+  'btn-tc-invertir', 'btn-tc-reset'
+];
+
+botonesAProteger.forEach(id => {
+  const boton = $(id);
+  if (boton) {
+    boton.ontouchstart = (e) => {
+      e.stopPropagation(); // Detiene el arrastre del visor
+    };
+  }
+});
 
 // Carga del estado inicial
 render(0);
