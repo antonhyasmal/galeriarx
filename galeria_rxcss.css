@@ -26,9 +26,29 @@
   filter: invert(1); 
 }
 /* Ítems e imágenes */
-.galeria-item-tc { display: none; width: 100%; height: 100%; align-items: center; justify-content: center; }
-.galeria-item-tc.activo { display: flex; }
-.galeria-item-tc img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: move; user-select: none; transition: transform 0.1s ease-out; }
+/* Elimina bordes o fondos no deseados en los contenedores de las imágenes */
+.galeria-item-tc {
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: none; /* Asegura que mantenga tu lógica de ocultado */
+}
+
+.galeria-item-tc.activo {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Evita que Blogger fuerce estilos extraños en las imágenes inyectadas */
+.galeria-item-tc img {
+  border: none !important;
+  max-width: 100% !important;
+  height: auto !important;
+  background: transparent !important;
+  box-shadow: none !important; /* Quita posibles sombras de la plantilla */
+}
 
 /* LEYENDA ANATÓMICA INTEGRADA CON ALTURA FIJA E INVARIABLE */
 .texto-corrido-anatomico { 
