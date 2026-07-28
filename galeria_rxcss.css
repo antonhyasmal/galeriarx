@@ -41,13 +41,16 @@
   align-items: center;
 }
 
-/* Evita que Blogger fuerce estilos extraños en las imágenes inyectadas */
+/* Corrección para que la imagen mantenga su tamaño real y proporciones */
 .galeria-item-tc img {
   border: none !important;
   max-width: 100% !important;
-  height: auto !important;
+  max-height: 100% !important; /* Evita que crezca más que el visor */
+  width: auto !important;       /* Permite que mantenga su proporción original */
+  height: auto !important;      /* Permite que mantenga su proporción original */
+  object-fit: contain !important; /* Ajusta la imagen dentro del espacio sin recortarla */
   background: transparent !important;
-  box-shadow: none !important; /* Quita posibles sombras de la plantilla */
+  box-shadow: none !important;
 }
 
 /* LEYENDA ANATÓMICA INTEGRADA CON ALTURA FIJA E INVARIABLE */
