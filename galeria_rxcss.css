@@ -122,10 +122,11 @@
 .barra-herramientas-tc button:hover svg { fill: #000; }
 
 /* Navegadores laterales */
-.btn-lateral { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(51,92,145,.5); border: none; width: 40px; height: 60px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; }
+.btn-lateral { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; background: rgba(51,92,145,.5); border: none; width: 40px; height: 60px; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 5 !important; }
 .btn-lateral:hover { background: rgba(80,137,204,.8); }
-.btn-lateral svg { width: 24px; height: 24px; fill: #fff; }
-.btn-lateral.izquierdo { left: 0; border-radius: 0 4px 4px 0; }
+.btn-lateral svg { width: 24px; height: 24px; fill: #fff;display: block !important;}
+.btn-lateral.izquierdo { left: 0 !important; border-radius: 0 4px 4px 0; }
+.btn-lateral.derecho { right: 0 !important; border-radius: 4px 0 0 4px; }
 
 /* 1. El visor es el escenario principal negro */
 #visor-tc {
