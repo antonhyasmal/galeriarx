@@ -167,10 +167,10 @@
   }
 }
 .barra-herramientas-tc button.control-activo {
-  background-color: rgba(51,92,145,.5) !important; /* Azul eléctrico médico (puedes cambiarlo a tu gusto) */
-  border-color: #00c6ff !important;
+  background-color: rgba(51,92,145,0.5) !important; /* Azul eléctrico médico (puedes cambiarlo a tu gusto) */
+  border-color: rgba(51,92,145) !important;
   color: #ffffff !important;
-  box-shadow: 0 0 10px rgba(0, 118, 255, 0.5) !important;
+  box-shadow: 0 0 10px rgba(66, 120, 189, 0.5) !important;
 }
 
 /* Estilo para los iconos SVG dentro de los botones */
