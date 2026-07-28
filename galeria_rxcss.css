@@ -115,9 +115,31 @@
 }
 /* Controles de Interfaz */
 .contador-tc { position: absolute; top: 10px; left: 10px; background: rgba(224,160,4); color: #fff; padding: 4px 8px; font-size: 12px; border-radius: 3px; z-index: 10; }
-.barra-herramientas-tc { position: relative !important; top: 10px; right: 10px; display: flex; gap: 6px; z-index: 30 !important; }
-.barra-herramientas-tc button { background: rgba(0,0,0,.7); border: 1px solid #444; width: 30px; height: 30px; border-radius: 4px; cursor: pointer;
- display: flex; align-items: center; justify-content: center; pointer-events: auto !important; touch-action: manipulation !important; }
+.barra-herramientas-tc {
+  /* Mantenemos la prioridad de capa más alta para móviles */
+  position: relative !important;
+  z-index: 200 !important;
+  
+  /* Restablecemos el comportamiento de caja nativo para que se alinee como antes */
+  display: flex !important;
+  flex-direction: row !important; /* Alinea los botones en fila horizontal */
+  justify-content: center !important; /* Los centra (cámbialo a flex-start si iban a la izquierda) */
+  align-items: center !important;
+  
+  /* Eliminamos márgenes o desbordes extraños */
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 5px 0 !important; /* Ajusta el espacio vertical a tu gusto */
+  margin: 0 0 10px 0 !important; /* Espaciado inferior antes del visor negro */
+}
+.barra-herramientas-tc button {
+  /* Aseguramos que cada botón mantenga su interacción sin descolocarse */
+  position: relative !important;
+  z-index: 210 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  cursor: pointer !important;
+}
 .barra-herramientas-tc button svg { width: 16px; height: 16px; fill: #fff; }
 .barra-herramientas-tc button:hover { background: #e8a813; }
 .barra-herramientas-tc button:hover svg { fill: #000; }
