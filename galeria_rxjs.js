@@ -101,13 +101,56 @@ const asignarAccion = (id, accion) => {
   };
 };
 
-// Vinculación segura de todas las funciones
+// Vinculación segura con control de estado activo dinámico
+asignarAccion('btn-tc-invertir', () => {
+  const activo = v.classList.toggle('invertido');
+  $('btn-tc-invertir').classList.toggle('control-activo', activo);
+});
+
+asignarAccion('btn-tc-zoom-mas', () => {
+  if (zoom < 4) {
+    zoom += 0.25;
+    tform();
+    // Ilumina el botón de zoom y apaga el de reset
+    $('btn-tc-zoom-mas').classList.add('control-activo');
+    $('btn-tc-zoom-menos').classList.remove('control-activo');
+    $('btn-tc-reset').classList.remove('control-activo');
+  }
+});
+
+asignarAccion('btn-tc-zoom-menos', () => {
+  if (zoom > 1) {
+    zoom -= 0.25;
+    if (zoom === 1) {
+      dx = dy = 0;
+      $('btn-tc-zoom-menos').classList.remove('control-activo');
+      $('btn-tc-zoom-mas').classList.remove('control-activo');
+    } else {
+      $('btn-tc-zoom-menos').classList.add('control-activo');
+      $('btn-tc-zoom-mas').classList.remove('control-activo');
+    }
+    tform();
+  }
+});
+
+asignarAccion('btn-tc-reset', () => {
+  zoom = 1;
+  dx = dy = 0;
+  v.classList.remove('invertido');
+  tform();
+  
+  // Apaga las luces de todos los botones de la barra al resetear
+  const botones = ['btn-tc-invertir', 'btn-tc-zoom-mas', 'btn-tc-zoom-menos', 'btn-tc-reset'];
+  botones.forEach(id => $(id)?.classList.remove('control-activo'));
+  
+  // Destello rápido en el botón reset para confirmar la acción
+  $('btn-tc-reset').classList.add('control-activo');
+  setTimeout(() => $('btn-tc-reset').classList.remove('control-activo'), 300);
+});
+
+// Los botones de navegación simple no necesitan mantenerse encendidos permanentemente
 asignarAccion('btn-tc-anterior', () => render(idx - 1));
 asignarAccion('btn-tc-siguiente', () => render(idx + 1));
-asignarAccion('btn-tc-invertir', () => v.classList.toggle('invertido'));
-asignarAccion('btn-tc-zoom-mas', () => { if (zoom < 4) { zoom += 0.25; tform(); } });
-asignarAccion('btn-tc-zoom-menos', () => { if (zoom > 1) { zoom -= 0.25; if (zoom == 1) dx = dy = 0; tform(); } });
-asignarAccion('btn-tc-reset', () => { zoom = 1; dx = dy = 0; v.classList.remove('invertido'); tform(); });
 
 // Carga del estado inicial
 render(0);
