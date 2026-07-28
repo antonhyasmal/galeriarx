@@ -167,7 +167,7 @@
   }
 }
 .barra-herramientas-tc button.control-activo {
-  background-color: #0076ff !important; /* Azul eléctrico médico (puedes cambiarlo a tu gusto) */
+  background-color: rgba(51,92,145,.5) !important; /* Azul eléctrico médico (puedes cambiarlo a tu gusto) */
   border-color: #00c6ff !important;
   color: #ffffff !important;
   box-shadow: 0 0 10px rgba(0, 118, 255, 0.5) !important;
