@@ -100,7 +100,14 @@ const asignarAccion = (id, accion) => {
     accion();
   };
 };
-
+// Función auxiliar para controlar el escudo de scroll según el nivel de zoom
+const verificarEstadoZoom = () => {
+  if (zoom > 1) {
+    v.classList.add('zoom-activo');
+  } else {
+    v.classList.remove('zoom-activo');
+  }
+};
 // Vinculación segura con control de estado activo dinámico
 asignarAccion('btn-tc-invertir', () => {
   const activo = v.classList.toggle('invertido');
@@ -111,7 +118,8 @@ asignarAccion('btn-tc-zoom-mas', () => {
   if (zoom < 4) {
     zoom += 0.25;
     tform();
-    // Ilumina el botón de zoom y apaga el de reset
+    verificarEstadoZoom(); // <-- Activa el bloqueo si el zoom supera 1
+    
     $('btn-tc-zoom-mas').classList.add('control-activo');
     $('btn-tc-zoom-menos').classList.remove('control-activo');
     $('btn-tc-reset').classList.remove('control-activo');
@@ -130,6 +138,7 @@ asignarAccion('btn-tc-zoom-menos', () => {
       $('btn-tc-zoom-mas').classList.remove('control-activo');
     }
     tform();
+    verificarEstadoZoom(); // <-- Libera el bloqueo si el zoom regresa a 1
   }
 });
 
@@ -137,13 +146,12 @@ asignarAccion('btn-tc-reset', () => {
   zoom = 1;
   dx = dy = 0;
   v.classList.remove('invertido');
+  verificarEstadoZoom(); // <-- Libera el bloqueo por completo al resetear
   tform();
   
-  // Apaga las luces de todos los botones de la barra al resetear
   const botones = ['btn-tc-invertir', 'btn-tc-zoom-mas', 'btn-tc-zoom-menos', 'btn-tc-reset'];
   botones.forEach(id => $(id)?.classList.remove('control-activo'));
   
-  // Destello rápido en el botón reset para confirmar la acción
   $('btn-tc-reset').classList.add('control-activo');
   setTimeout(() => $('btn-tc-reset').classList.remove('control-activo'), 300);
 });
