@@ -197,6 +197,12 @@
   display: block !important;    /* Cambiamos de flex a block para evitar filas flotantes */
   width: 100% !important;
   height: 450px !important;     /* Ajusta este alto al tamaño real de tu visor */
-  touch-action: none !important; 
+   /* Permite el scroll vertical normal del dedo por encima del visor */
+  touch-action: pan-y !important; 
 }
+
+/* ESTA CLASE SE ACTIVARÁ SOLO CUANDO EXISTA ZOOM */
+#visor-tc.zoom-activo {
+  /* Bloquea por completo el scroll de la web ÚNICAMENTE dentro del recuadro negro */
+  touch-action: none !important; 
 }
