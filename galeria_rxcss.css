@@ -141,8 +141,8 @@
   cursor: pointer !important;
   
   /* Tamaño y forma compacta */
-  width: 28px !important;
-  height: 28px !important;
+  width: 30px !important;
+  height: 30px !important;
   padding: 0 !important;
   margin: 0 !important;
   display: flex !important;
@@ -175,8 +175,8 @@
 
 /* Estilo para los iconos SVG dentro de los botones */
 .barra-herramientas-tc button svg {
-  width: 16px !important;
-  height: 16px !important;
+  width: 18px !important;
+  height: 18px !important;
   fill: currentColor !important; /* Hace que el icono cambie de color junto con el texto */
   display: block !important;
 }
