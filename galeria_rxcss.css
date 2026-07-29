@@ -76,27 +76,65 @@
 
 /* LEYENDA ANATÓMICA CON ALTURA FIJA */
 .texto-corrido-anatomico { 
-  display: block; 
-  width: 100%; 
-  height: 85px; 
-  overflow-y: auto; 
-  box-sizing: border-box; 
-  margin-top: 0; 
-  padding: 12px 15px; 
-  font-size: 13.5px; 
-  line-height: 1.6; 
-  color: #dddddd; 
-  text-align: justify; 
-  background: #000000; 
-  border-top: 1px solid #7D0000; 
-  border-radius: 0 0 6px 6px; 
+  display: block !important; 
+  width: 100% !important; 
+  height: 110px !important; /* Aumentamos ligeramente para acomodar las etiquetas */
+  overflow-y: auto !important; 
+  box-sizing: border-box !important; 
+  margin-top: 0 !important; 
+  padding: 12px !important; 
+  background: #090909 !important; 
+  border-top: 2px solid #7D0000 !important; 
+  border-radius: 0 0 6px 6px !important; 
 }
 
+/* Contenedor flexible para alinear las etiquetas una al lado de la otra */
+.tc-contenedor-leyendas {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  padding: 2px !important;
+}
+
+/* Diseño de cada etiqueta anatómica individual */
+.tc-tag {
+  background: rgba(125, 0, 0, 0.15) !important;
+  border: 1px solid rgba(125, 0, 0, 0.4) !important;
+  border-radius: 4px !important;
+  padding: 5px 10px !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  color: #e0e0e0 !important;
+  font-family: Arial, sans-serif !important;
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+}
+
+/* Resaltado estricto del número indicador dentro de la etiqueta */
+.tc-tag strong {
+  color: #ff3333 !important;
+  font-weight: bold !important;
+  background: rgba(255, 51, 51, 0.1) !important;
+  padding: 1px 5px !important;
+  border-radius: 3px !important;
+  font-size: 12px !important;
+}
+
+/* Mensaje cuando no hay estructuras rotuladas */
+.tc-sin-datos {
+  color: #666666 !important;
+  font-style: italic !important;
+  font-size: 13.5px !important;
+  padding: 5px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+/* Personalización del scrollbar médico */
 .texto-corrido-anatomico::-webkit-scrollbar { width: 6px; }
-.texto-corrido-anatomico::-webkit-scrollbar-track { background: #000000; }
-.texto-corrido-anatomico::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
-.texto-corrido-anatomico::-webkit-scrollbar-thumb:hover { background: #e8a813; }
-.texto-corrido-anatomico strong { color: #B30000; font-weight: bold; }
+.texto-corrido-anatomico::-webkit-scrollbar-track { background: #090909; }
+.texto-corrido-anatomico::-webkit-scrollbar-thumb { background: #222222; border-radius: 3px; }
+.texto-corrido-anatomico::-webkit-scrollbar-thumb:hover { background: #e0a004; }
 
 /* Controles de Interfaz */
 .contador-tc { position: absolute; top: 10px; left: 10px; background: rgba(224,160,4); color: #fff; padding: 4px 8px; font-size: 12px; border-radius: 3px; z-index: 10; }
