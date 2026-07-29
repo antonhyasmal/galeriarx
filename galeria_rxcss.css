@@ -9,16 +9,16 @@
 }
 .visor-estructura { position: relative; width: 100%; }
 
-/* CAJA NEGRA DEL VISOR (Unificada con #visor-tc) */
+/* CAJA NEGRA DEL VISOR */
 .visor-negro { 
   background-color: #000000 !important;
   position: relative !important;
   width: 100% !important; 
-  height: 450px !important; /* Altura definitiva unificada */
+  height: 450px !important; 
   overflow: hidden !important; 
   display: block !important; 
   border-radius: 6px 6px 0 0;
-  touch-action: pan-y !important; /* Permite scroll vertical de la web en móvil */
+  touch-action: pan-y !important; /* Permite scroll vertical normal en móvil */
 }
 
 /* Bloquea por completo el scroll de la web ÚNICAMENTE con zoom activo */
@@ -31,6 +31,7 @@
   filter: invert(1); 
 }
 
+/* Estructura individual de cada corte de la tomografía */
 .galeria-item-tc {
   position: absolute !important;
   top: 0 !important;
@@ -42,11 +43,9 @@
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -60,7 +59,7 @@
   z-index: 2 !important;
 }
 
-/* Forzar imagen médica limpia sin herencias de Blogger */
+/* Forzar imagen médica limpia sin herencias visuales de Blogger */
 .galeria-item-tc img {
   max-width: 100% !important;
   max-height: 100% !important;
@@ -162,36 +161,29 @@
 }
 
 /* Navegadores laterales */
-.btn-lateral { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; background: rgba(51,92,145,.5); border: none; width: 40px; height: 60px; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 5 !important; }
-.btn-lateral:hover { background: rgba(80,137,204,.8); }
-.btn-lateral svg { width: 24px; height: 24px; fill: #fff; display: block !important;}
-.btn-lateral.izquierdo { left: 0 !important; border-radius: 0 4px 4px 0; }
-.btn-lateral.derecho { right: 0 !important; border-radius: 4px 0 0 4px; }
-
-/* PANTALLA DE CARGA PACS */
-.tc-cargador-pantalla {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background: #000000 !important;
-  z-index: 500 !important; /* Capa superior provisional */
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: #ffffff !important;
-  font-family: Arial, sans-serif !important;
-  font-size: 14px !important;
+.btn-lateral { 
+  position: absolute !important; 
+  top: 50% !important; 
+  transform: translateY(-50%) !important; 
+  background: rgba(51,92,145,.5) !important; 
+  border: none !important; 
+  width: 40px !important; 
+  height: 60px !important; 
+  cursor: pointer !important; 
+  display: flex !important; 
+  align-items: center !important; 
+  justify-content: center !important; 
+  z-index: 5 !important; 
 }
+.btn-lateral:hover { background: rgba(80,137,204,.8) !important; }
+.btn-lateral svg { width: 24px; height: 24px; fill: #fff; display: block !important;}
+.btn-lateral.izquierdo { left: 0 !important; border-radius: 0 4px 4px 0 !important; }
+.btn-lateral.derecho { right: 0 !important; border-radius: 4px 0 0 4px !important; }
 
-/* Animación de rotación */
+/* 🔄 ANIMACIÓN ÚNICA DEL LOADER DESDE EL CSS */
 .tc-spin {
   animation: spin-tc 1s linear infinite !important;
-  margin-bottom: 10px !important;
 }
-
 @keyframes spin-tc {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
