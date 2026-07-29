@@ -3,28 +3,34 @@
   max-width: 600px; 
   margin: 20px auto; 
   font-family: Arial, sans-serif; 
-  background: #111111; /* Fondo oscuro exterior */
+  background: #111111; 
   padding: 10px;
   border-radius: 8px;
 }
 .visor-estructura { position: relative; width: 100%; }
 
-/* CAJA NEGRA DEL VISOR */
+/* CAJA NEGRA DEL VISOR (Unificada con #visor-tc) */
 .visor-negro { 
-  position: relative; 
-  background: #000000; 
-  width: 100%; 
-  height: 400px; 
-  overflow: hidden; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  border-radius: 6px 6px 0 0; /* Solo redondeamos las esquinas superiores */
+  background-color: #000000 !important;
+  position: relative !important;
+  width: 100% !important; 
+  height: 450px !important; /* Altura definitiva unificada */
+  overflow: hidden !important; 
+  display: block !important; 
+  border-radius: 6px 6px 0 0;
+  touch-action: pan-y !important; /* Permite scroll vertical de la web en móvil */
 }
-/* Invierte estrictamente los colores de la imagen interna sin alterar los fondos negros */
+
+/* Bloquea por completo el scroll de la web ÚNICAMENTE con zoom activo */
+.visor-negro.zoom-activo {
+  touch-action: none !important; 
+}
+
+/* Invierte colores de la imagen sin alterar fondos negros */
 .visor-negro.invertido img { 
   filter: invert(1); 
 }
+
 .galeria-item-tc {
   position: absolute !important;
   top: 0 !important;
@@ -34,22 +40,19 @@
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
-  box-shadow: none !important;
   border: none !important;
+  box-shadow: none !important;
   
-  /* Centrado interno perfecto de la imagen */
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   
-  /* Por defecto ocultos e invisibles */
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
   z-index: 1 !important;
 }
 
-/* 3. Solo el elemento activo se vuelve visible y recibe clics */
 .galeria-item-tc.activo {
   opacity: 1 !important;
   visibility: visible !important;
@@ -57,7 +60,7 @@
   z-index: 2 !important;
 }
 
-/* 4. Forzar a la imagen a rellenar el espacio sin deformarse ni heredar fondos de Blogger */
+/* Forzar imagen médica limpia sin herencias de Blogger */
 .galeria-item-tc img {
   max-width: 100% !important;
   max-height: 100% !important;
@@ -65,23 +68,19 @@
   height: auto !important;
   object-fit: contain !important;
   display: block !important;
-  
-  /* Limpieza radical de estilos heredados por el "body img" de Blogger */
   background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* LEYENDA ANATÓMICA INTEGRADA CON ALTURA FIJA E INVARIABLE */
+/* LEYENDA ANATÓMICA CON ALTURA FIJA */
 .texto-corrido-anatomico { 
   display: block; 
   width: 100%; 
-  height: 85px; /* Altura fija estricta para garantizar que nunca cambie el tamaño general */
-  overflow-y: auto; /* Muestra una barra de desplazamiento interno si el texto llega a exceder el espacio */
+  height: 85px; 
+  overflow-y: auto; 
   box-sizing: border-box; 
   margin-top: 0; 
   padding: 12px 15px; 
@@ -94,53 +93,36 @@
   border-radius: 0 0 6px 6px; 
 }
 
-/* Personalización elegante de la barra de scroll para que combine con el diseño PACS oscuro */
-.texto-corrido-anatomico::-webkit-scrollbar {
-  width: 6px;
-}
-.texto-corrido-anatomico::-webkit-scrollbar-track {
-  background: #000000;
-}
-.texto-corrido-anatomico::-webkit-scrollbar-thumb {
-  background: #333333;
-  border-radius: 3px;
-}
-.texto-corrido-anatomico::-webkit-scrollbar-thumb:hover {
-  background: #e8a813; /* Resalta en dorado al pasar el cursor */
-}
+.texto-corrido-anatomico::-webkit-scrollbar { width: 6px; }
+.texto-corrido-anatomico::-webkit-scrollbar-track { background: #000000; }
+.texto-corrido-anatomico::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
+.texto-corrido-anatomico::-webkit-scrollbar-thumb:hover { background: #e8a813; }
+.texto-corrido-anatomico strong { color: #B30000; font-weight: bold; }
 
-.texto-corrido-anatomico strong { 
-  color: #B30000; 
-  font-weight: bold; 
-}
 /* Controles de Interfaz */
 .contador-tc { position: absolute; top: 10px; left: 10px; background: rgba(224,160,4); color: #fff; padding: 4px 8px; font-size: 12px; border-radius: 3px; z-index: 10; }
+
 .barra-herramientas-tc {
   position: absolute !important;
-  top: 15px !important;       /* Separación desde el borde superior del visor */
-  right: 15px !important;     /* Separación desde el borde derecho del visor */
-  z-index: 220 !important;     /* Prioridad máxima por encima de cualquier corte médico */
-  
-  /* Alineación compacta en fila horizontal */
+  top: 15px !important;       
+  right: 15px !important;     
+  z-index: 220 !important;     
   display: flex !important;
   flex-direction: row !important;
-  gap: 6px !important;        /* Espacio de separación mínimo entre botón y botón */
-  
-  /* Limpieza de herencias estructurales */
-  width: auto !important;     /* Evita que se estire a lo ancho */
+  gap: 6px !important;        
+  width: auto !important;     
   height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
 }
+
 .barra-herramientas-tc button {
   position: relative !important;
   z-index: 230 !important;
   pointer-events: auto !important;
   touch-action: manipulation !important;
   cursor: pointer !important;
-  
-  /* Tamaño y forma compacta */
   width: 30px !important;
   height: 30px !important;
   padding: 0 !important;
@@ -148,61 +130,40 @@
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  border-radius: 8px !important; /* Bordes suaves */
-
-  /* Estilo Minimalista (Oscuro semi-transparente) */
+  border-radius: 8px !important; 
   background-color: rgba(30, 30, 30, 0.75) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   color: #ffffff !important;
-  backdrop-filter: blur(4px) !important; /* Efecto desenfoque moderno */
+  backdrop-filter: blur(4px) !important; 
   transition: all 0.2s ease !important;
 }
 
-/* Efecto visual al pasar el mouse (Solo PC) */
 @media (hover: hover) {
   .barra-herramientas-tc button:hover {
     background-color: rgba(224,160,4, 0.7) !important;
     border-color: rgba(255, 255, 255, 0.3) !important;
     transform: scale(1.05);
   }
+  .barra-herramientas-tc button:hover svg { fill: #000; }
 }
+
 .barra-herramientas-tc button.control-activo {
-  background-color: rgba(51,92,145,0.5) !important; /* Azul eléctrico médico (puedes cambiarlo a tu gusto) */
+  background-color: rgba(51,92,145,0.5) !important; 
   border-color: rgba(51,92,145) !important;
   color: #ffffff !important;
   box-shadow: 0 0 10px rgba(66, 120, 189, 0.5) !important;
 }
 
-/* Estilo para los iconos SVG dentro de los botones */
 .barra-herramientas-tc button svg {
   width: 18px !important;
   height: 18px !important;
-  fill: currentColor !important; /* Hace que el icono cambie de color junto con el texto */
+  fill: currentColor !important; 
   display: block !important;
 }
-.barra-herramientas-tc button:hover svg { fill: #000; }
 
 /* Navegadores laterales */
 .btn-lateral { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; background: rgba(51,92,145,.5); border: none; width: 40px; height: 60px; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; z-index: 5 !important; }
 .btn-lateral:hover { background: rgba(80,137,204,.8); }
-.btn-lateral svg { width: 24px; height: 24px; fill: #fff;display: block !important;}
+.btn-lateral svg { width: 24px; height: 24px; fill: #fff; display: block !important;}
 .btn-lateral.izquierdo { left: 0 !important; border-radius: 0 4px 4px 0; }
 .btn-lateral.derecho { right: 0 !important; border-radius: 4px 0 0 4px; }
-
-/* 1. El visor es el escenario principal negro */
-#visor-tc {
-  background-color: #000000 !important;
-  position: relative !important;
-  overflow: hidden !important; /* Corta cualquier desborde horizontal */
-  display: block !important;    /* Cambiamos de flex a block para evitar filas flotantes */
-  width: 100% !important;
-  height: 450px !important;     /* Ajusta este alto al tamaño real de tu visor */
-   /* Permite el scroll vertical normal del dedo por encima del visor */
-  touch-action: pan-y !important; 
-}
-
-/* ESTA CLASE SE ACTIVARÁ SOLO CUANDO EXISTA ZOOM */
-#visor-tc.zoom-activo {
-  /* Bloquea por completo el scroll de la web ÚNICAMENTE dentro del recuadro negro */
-  touch-action: none !important; 
-}
