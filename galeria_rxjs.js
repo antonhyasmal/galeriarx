@@ -165,9 +165,9 @@ if (v) {
   // Carga del estado inicial
   render(0);
 }
-// Ocultar el indicador de carga cuando todo esté listo e inyectado
+// ELIMINACIÓN TOTAL DEL LOADER AL FINALIZAR LA INYECCIÓN DOM
   const loader = $('tc-loading');
   if (loader) {
-    loader.style.display = 'none';
+    loader.remove();
   }
 }
