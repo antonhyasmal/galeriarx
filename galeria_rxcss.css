@@ -78,62 +78,43 @@
 .texto-corrido-anatomico { 
   display: block !important; 
   width: 100% !important; 
-  height: 110px !important; /* Aumentamos ligeramente para acomodar las etiquetas */
+  height: 85px !important; /* Mantenemos tu altura compacta original */
   overflow-y: auto !important; 
   box-sizing: border-box !important; 
   margin-top: 0 !important; 
-  padding: 12px !important; 
-  background: #090909 !important; 
-  border-top: 2px solid #7D0000 !important; 
+  padding: 14px 18px !important; /* Más espacio interno para que respire el texto */
+  
+  /* Tipografía y Espaciado */
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif !important; 
+  font-size: 14px !important; 
+  font-weight: 400 !important;
+  line-height: 1.7 !important; /* Mayor separación entre líneas para facilitar la lectura */
+  letter-spacing: 0.3px !important; /* Espaciado sutil entre letras */
+  word-spacing: 1px !important; /* Espaciado optimizado entre palabras */
+  
+  color: #e0e0e0 !important; /* Blanco suave, menos agresivo a la vista */
+  text-align: justify !important; 
+  background: #0d0d0d !important; /* Fondo negro profundo mate */
+  border-top: 2px solid #990000 !important; /* Línea superior roja médica más elegante */
   border-radius: 0 0 6px 6px !important; 
 }
 
-/* Contenedor flexible para alinear las etiquetas una al lado de la otra */
-.tc-contenedor-leyendas {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 8px !important;
-  padding: 2px !important;
+/* Estilo para los números resaltados (strong) */
+.texto-corrido-anatomico strong { 
+  color: #ff4d4d !important; /* Rojo vibrante pero agradable sobre fondo oscuro */
+  font-weight: 600 !important; 
+  margin-left: 6px !important; /* Separación respecto al punto anterior */
 }
 
-/* Diseño de cada etiqueta anatómica individual */
-.tc-tag {
-  background: rgba(125, 0, 0, 0.15) !important;
-  border: 1px solid rgba(125, 0, 0, 0.4) !important;
-  border-radius: 4px !important;
-  padding: 5px 10px !important;
-  font-size: 13px !important;
-  line-height: 1.4 !important;
-  color: #e0e0e0 !important;
-  font-family: Arial, sans-serif !important;
-  display: inline-flex !important;
-  align-items: baseline !important;
-  gap: 6px !important;
+/* Forzar que el primer número no tenga separación a la izquierda */
+.texto-corrido-anatomico strong:first-child {
+  margin-left: 0 !important;
 }
 
-/* Resaltado estricto del número indicador dentro de la etiqueta */
-.tc-tag strong {
-  color: #ff3333 !important;
-  font-weight: bold !important;
-  background: rgba(255, 51, 51, 0.1) !important;
-  padding: 1px 5px !important;
-  border-radius: 3px !important;
-  font-size: 12px !important;
-}
-
-/* Mensaje cuando no hay estructuras rotuladas */
-.tc-sin-datos {
-  color: #666666 !important;
-  font-style: italic !important;
-  font-size: 13.5px !important;
-  padding: 5px !important;
-  font-family: Arial, sans-serif !important;
-}
-
-/* Personalización del scrollbar médico */
+/* Personalización del Scrollbar */
 .texto-corrido-anatomico::-webkit-scrollbar { width: 6px; }
-.texto-corrido-anatomico::-webkit-scrollbar-track { background: #090909; }
-.texto-corrido-anatomico::-webkit-scrollbar-thumb { background: #222222; border-radius: 3px; }
+.texto-corrido-anatomico::-webkit-scrollbar-track { background: #0d0d0d; }
+.texto-corrido-anatomico::-webkit-scrollbar-thumb { background: #262626; border-radius: 3px; }
 .texto-corrido-anatomico::-webkit-scrollbar-thumb:hover { background: #e0a004; }
 
 /* Controles de Interfaz */
