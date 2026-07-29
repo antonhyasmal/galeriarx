@@ -167,3 +167,9 @@
 .btn-lateral svg { width: 24px; height: 24px; fill: #fff; display: block !important;}
 .btn-lateral.izquierdo { left: 0 !important; border-radius: 0 4px 4px 0; }
 .btn-lateral.derecho { right: 0 !important; border-radius: 4px 0 0 4px; }
+
+/* Animación de rotación para el icono de carga */
+@keyframes spin-tc {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
