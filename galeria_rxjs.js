@@ -46,7 +46,33 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (cortesElementos[idx]) cortesElementos[idx].classList.add('activo');
       if (c) c.textContent = `Imagen: ${idx + 1} / ${cortesElementos.length}`;
-      if (ley) ley.innerHTML = TEXTOS_ANATOMICOS[idx + 1] || "<em style='color:#777;'>Sin anotaciones.</em>";
+      
+      // ==========================================
+      // PROCESADOR INTELIGENTE DE TEXTOS ANATÓMICOS
+      // ==========================================
+      if (ley) {
+        const textoOriginal = TEXTOS_ANATOMICOS[idx + 1];
+        
+        if (textoOriginal && textoOriginal.trim() !== "") {
+          // Dividimos el texto usando los números de las etiquetas <strong> como guías
+          // Esto separa cada punto anatómico de forma limpia
+          const partes = textoOriginal.split(/(?=<strong>)/g);
+          
+          let htmlAcumulado = '<div class="tc-contenedor-leyendas">';
+          partes.forEach(parte => {
+            if(parte.trim() !== "") {
+              htmlAcumulado += `<span class="tc-tag">${parte.trim()}</span>`;
+            }
+          });
+          htmlAcumulado += '</div>';
+          
+          ley.innerHTML = htmlAcumulado;
+        } else {
+          // Si el corte no tiene texto configurado
+          ley.innerHTML = '<span class="tc-sin-datos">Sin anotaciones en este corte.</span>';
+        }
+      }
+      
       tform();
     };
 
